@@ -15,6 +15,12 @@ def echo() -> None:
     """Return a simple Hello World message"""
     click.echo("Hello, world!")
 
+    
+@cli.command()
+def new_command_for_test() -> None:
+    """Return a simple Hello World message"""
+    click.echo("My new command!")
+    
 
 @cli.command()
 @click.version_option(version=__version__)
