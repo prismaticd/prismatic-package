@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prismatic-package"
-version = "0.1.3"
+version = "0.1.4"
 description = ""
 authors = ["Benoit Chabord <benoit.chabord@prismaticdigital.com>"]
 license = "MIT"
