@@ -6,7 +6,7 @@ import nox
 from nox.sessions import Session
 
 package = "prismatic_package"
-nox.options.sessions = "lint", "safety", "mypy", "tests"
+nox.options.sessions = "pre_commit", "isort", "black", "lint", "safety", "mypy", "tests"
 locations = "prismatic_package", "tests", "noxfile.py", "docs/conf.py"
 
 
@@ -28,9 +28,30 @@ def install_with_constraints(session: Session, *args: str, **kwargs: Any) -> Non
     """
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
-            "poetry", "export", "--dev", "--format=requirements.txt", f"--output={requirements.name}", external=True,
+            "poetry",
+            "export",
+            "--dev",
+            "--format=requirements.txt",
+            f"--output={requirements.name}",
+            external=True,
         )
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
+
+
+@nox.session(python="3.8")
+def pre_commit(session: Session) -> None:
+    """Run pre-commit code formatter."""
+    args = session.posargs or []
+    install_with_constraints(session, "pre_commit ")
+    session.run("pre-commit", "run", "--hook-stage", "manual", "-a", *args)
+
+
+@nox.session(python="3.8")
+def isort(session: Session) -> None:
+    """Run isort code formatter."""
+    args = session.posargs or locations
+    install_with_constraints(session, "isort ")
+    session.run("isort", "--profile", "black", *args)
 
 
 @nox.session(python="3.8")
@@ -53,7 +74,6 @@ def lint(session: Session) -> None:
         "flake8-black",
         "flake8-bugbear",
         "flake8-docstrings",
-        "flake8-import-order",
         "darglint",
     )
     session.run("flake8", *args)
