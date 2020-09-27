@@ -2,7 +2,7 @@
 name = "prismatic-package"
 version = "1.0.0"
 description = ""
-authors = ["Benoit Chabord <benoit.chabord@prismaticdigital.com>"]
+authors = []
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/prismaticd/prismatic-package"
