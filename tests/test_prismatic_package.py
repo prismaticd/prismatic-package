@@ -1,6 +1,7 @@
-from click.testing import CliRunner
-from prismatic_package import main
 import pytest
+from click.testing import CliRunner
+
+from prismatic_package import main
 
 
 @pytest.fixture

@@ -1,7 +1,6 @@
 """Sphinx configuration."""
 from datetime import datetime
 
-
 project = "Prismatic Package"
 author = "Prismatic"
 copyright = f"{datetime.now().year}, {author}"
